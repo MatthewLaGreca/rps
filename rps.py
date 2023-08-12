@@ -132,6 +132,10 @@ def gui_buttons(player_input):
 
 
 def reset_it(x):
+    global wins
+    global losses
+    global draws
+    
     wins=0
     losses=0
     draws=0
@@ -144,23 +148,23 @@ win=Tk()
 win.geometry("820x425")
 win.title("Welcome to Rock Paper Scissors!")
 
-ico = Image.open('rps/rps-ico-64.png')
+ico = Image.open('rps/assets/images/rps-ico-64.png')
 photo = ImageTk.PhotoImage(ico)
 win.wm_iconphoto(False, photo)
 
 win_frame = Frame(win)
 win_frame.pack()
 
-qm = Image.open('rps/qm-120.png')
-rk = Image.open('rps/rock.png')
-pp = Image.open('rps/paper.png')
-sc = Image.open('rps/scissors.png')
-vs = Image.open('rps/vs-150-bg.png')
-rk_l = Image.open('rps/rock-120.png')
-pp_l = Image.open('rps/paper-120.png')
-sc_l = Image.open('rps/scissors-120.png')
-rst = Image.open('rps/reset_btn.png')
-qt = Image.open('rps/quit_btn.png')
+qm = Image.open('rps/assets/images/qm-120.png')
+rk = Image.open('rps/assets/images/rock.png')
+pp = Image.open('rps/assets/images/paper.png')
+sc = Image.open('rps/assets/images/scissors.png')
+vs = Image.open('rps/assets/images/vs-150-bg.png')
+rk_l = Image.open('rps/assets/images/rock-120.png')
+pp_l = Image.open('rps/assets/images/paper-120.png')
+sc_l = Image.open('rps/assets/images/scissors-120.png')
+rst = Image.open('rps/assets/images/reset_btn.png')
+qt = Image.open('rps/assets/images/quit_btn.png')
 
 qs_mk = ImageTk.PhotoImage(qm)
 paper = ImageTk.PhotoImage(pp)
