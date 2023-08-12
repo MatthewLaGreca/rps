@@ -15,7 +15,13 @@ class Fighter():
     # Function that determines if the opponent fighter is going to throw Rock, Paper or Scissors
     # Needs Jeremy's random throw generator code
     def throw(inputs):
-        this_throw = inputs[random.randint(0,len(inputs)-2)]
+        this_throw = inputs[random.randrange(0,len(inputs)-1)]
+        if this_throw == 'p':
+            right_display_label.configure(image=paper)
+        elif this_throw == 'r':
+            right_display_label.configure(image=rock)
+        elif this_throw == 's':
+            right_display_label.configure(image=scissors)
         return this_throw
 
     # Function that determines if the next opponent's throw will be a super or not, to be filled in later
@@ -45,11 +51,10 @@ class Fighter():
     def status(self):
         if self.hp <= 0:
             return 'KO'
-
-
         
 
 def simple_gameplay(player_input, opponent_input):
+
     """ The gameplay loop, in it's simplest form: \
         rock beats scissors, scissors beats paper \
         paper beats rock \
@@ -59,62 +64,76 @@ def simple_gameplay(player_input, opponent_input):
     # If the player input rock
     if player_input == 'r':
         if opponent_input == 's':
+            results_display_lable.config(text="Rock breaks Scissors, You Win!")
             return 'win'
         elif opponent_input == 'p':
+            results_display_lable.config(text="Paper covers Rock, You Lose!")
             return 'loss'
         else:
+            results_display_lable.config(text="It's a Draw!")
             return 'draw'
         
     #If the player input scissors
     elif player_input == 's':
+       
         if opponent_input == 's':
+            results_display_lable.config(text="It's a Draw!")
             return 'draw'
         elif opponent_input == 'p':
+            results_display_lable.config(text="Scissors cut Paper, You Win!")
             return 'win'
         else:
+            results_display_lable.config(text="Rock breaks Scissors, You Lose!")
             return 'loss'
     
     #If the player input paper
     else:
+        
         if opponent_input == 's':
+            results_display_lable.config(text="Scissors cut Paper, You Lose!")
             return 'loss'
         elif opponent_input == 'p':
+            results_display_lable.config(text="It's a Draw!")
             return 'draw'
         else:
+            results_display_lable.config(text="Paper covers Rock, You Win!")
             return 'win'
 
 # Main program        
 print('Welcome to Rock, Paper, Scissors')
-inputs = ['r','p','s','q']
+inputs = ['r','p','s','r','s','p','q']
 wins, losses, draws = 0,0,0
-opponent_input = ''
-while True:
-    player_input = input('What would you like to throw? Type "r" for rock, \
-"p" for paper, "s" for scissors or "q" if you would \
-like to stop playing ').lower()
-    
-    opponent_input = Fighter.throw(inputs)
 
-    if player_input in inputs:
-        if player_input == 'q':
-            print(f'Here are your results: \n Wins: {wins} Losses: {losses} Draws: {draws} \
-                  \n Thank you for playing!')
-            break
-        else:
-            if simple_gameplay(player_input,opponent_input) == 'win':
-                wins += 1
-                print("You Win!")
-            elif simple_gameplay(player_input,opponent_input) == 'loss':
-                losses += 1
-                print('You Lose!')
-            else:
-                draws += 1
-                print("Draw")
+def gui_buttons(player_input):
+    opponent_input = Fighter.throw(inputs)
+    global losses
+    global draws
+    global wins
+
+    if player_input == 'p':
+        left_display_label.configure(image=paper)
+    elif player_input == 'r':
+        left_display_label.configure(image=rock)
+    elif player_input == 's':
+        left_display_label.configure(image=scissors)
+
+    if player_input == 'q':
+        print(f'Here are your results: \n Wins: {wins} Losses: {losses} Draws: {draws} \
+                \n Thank you for playing!')
     else:
-        print("Invalid input, please try again")
+        if simple_gameplay(player_input,opponent_input) == 'win':
+            wins += 1
+            results_display_lable.config(Tex)
+        elif simple_gameplay(player_input,opponent_input) == 'loss':
+            losses += 1
+            print('You Lose!')
+        else:
+            draws += 1
+            print("Draw")
+    
 
 win=Tk()
-win.geometry("820x450")
+win.geometry("820x425")
 win.title("Welcome to Rock Paper Scissors!")
 
 ico = Image.open('rps/rps-ico-64.png')
@@ -128,25 +147,52 @@ rk = Image.open('rps/rock.png')
 pp = Image.open('rps/paper.png')
 sc = Image.open('rps/scissors.png')
 
+rk_l = Image.open('rps/rock-large.png')
+pp_l = Image.open('rps/paper-large.png')
+sc_l = Image.open('rps/scissors-large.png')
+
+paper_l = ImageTk.PhotoImage(pp_l)
+rock_l = ImageTk.PhotoImage(rk_l)
+scissors_l = ImageTk.PhotoImage(sc_l)
+
 win_frame.columnconfigure(0,weight=1,minsize=136)
 win_frame.columnconfigure(1,weight=1)
 win_frame.columnconfigure(2,weight=1,minsize=136)
 win_frame.rowconfigure(2,weight=1)
 
-main_display = Label(win_frame,width=100,height=7,anchor='center',background="#ddd",font=('arial','20','bold'),text="Starting Text")
-main_display.grid(row=1,column=1,padx=10,pady=10)
+main_display_frame = Frame(win_frame)
+main_display_frame.columnconfigure(3,weight=1)
+main_display_frame.rowconfigure(1,weight=1)
+main_display_frame.pack()
 
-paper = ImageTk.PhotoImage(pp)
-paper_label = Label(win,image=paper)
-paper_label.place(relx=0.44,rely=.90,anchor='center')
+main_display = Label(main_display_frame,width=34,height=5,anchor='center',font=('arial','20','bold'),text="VS",relief='sunken',bd=3)
+main_display.grid(row=1,column=1,padx=10,pady=10,sticky=NSEW)
 
 scissors = ImageTk.PhotoImage(sc)
 scissors_label = Label(win,image=scissors)
-scissors_label.place(relx=0.57,rely=.89,anchor='center')
+scissors_label.place(relx=0.57,rely=.79,anchor='center')
 
 rock = ImageTk.PhotoImage(rk)
 roc_label = Label(win,image=rock)
-roc_label.place(relx=0.5,rely=.70,anchor='center')
+roc_label.place(relx=0.5,rely=.60,anchor='center')
+
+paper = ImageTk.PhotoImage(pp)
+paper_label = Label(win,image=paper)
+paper_label.place(relx=0.44,rely=.80,anchor='center')
+
+paper_label.bind("<Button-1>",lambda p: gui_buttons('p'))
+roc_label.bind("<Button-1>",lambda r: gui_buttons('r'))
+scissors_label.bind("<Button-1>",lambda s:gui_buttons('s'))
+
+left_display_label = Label(main_display_frame,image='')
+left_display_label.place(relx=.23,rely=.5,anchor='center')
+
+right_display_label = Label(main_display_frame,image='')
+right_display_label.place(relx=.77,rely=.5,anchor='center')
+
+results_display_lable = Label(main_display_frame,text="Paper Covers Rock, You Win!",font=('arial','16','bold'))
+results_display_lable.grid(row=1,column=1,sticky=S)
+
 
 win.mainloop()
 

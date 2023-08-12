@@ -37,3 +37,29 @@ roc_label = Label(win,image=rock)
 roc_label.place(relx=0.5,rely=.70,anchor='center')
 
 win.mainloop()
+
+
+# while True:
+#     player_input = input('What would you like to throw? Type "r" for rock, \
+# "p" for paper, "s" for scissors or "q" if you would \
+# like to stop playing ').lower()
+    
+#     opponent_input = Fighter.throw(inputs)
+
+#     if player_input in inputs:
+#         if player_input == 'q':
+#             print(f'Here are your results: \n Wins: {wins} Losses: {losses} Draws: {draws} \
+#                   \n Thank you for playing!')
+#             break
+#         else:
+#             if simple_gameplay(player_input,opponent_input) == 'win':
+#                 wins += 1
+#                 print("You Win!")
+#             elif simple_gameplay(player_input,opponent_input) == 'loss':
+#                 losses += 1
+#                 print('You Lose!')
+#             else:
+#                 draws += 1
+#                 print("Draw")
+#     else:
+#         print("Invalid input, please try again")
