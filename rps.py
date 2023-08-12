@@ -117,16 +117,16 @@ win=Tk()
 win.geometry("820x450")
 win.title("Welcome to Rock Paper Scissors!")
 
-ico = Image.open('rps/rps-ico-64.png')
+ico = Image.open('rps-ico-64.png')
 photo = ImageTk.PhotoImage(ico)
 win.wm_iconphoto(False, photo)
 
 win_frame = Frame(win)
 win_frame.pack()
 
-rk = Image.open('rps/rock.png')
-pp = Image.open('rps/paper.png')
-sc = Image.open('rps/scissors.png')
+rk = Image.open('rock.png')
+pp = Image.open('paper.png')
+sc = Image.open('scissors.png')
 
 win_frame.columnconfigure(0,weight=1,minsize=136)
 win_frame.columnconfigure(1,weight=1)
