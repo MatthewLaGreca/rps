@@ -1,1 +1,1 @@
-assets/i
+assets\images\
