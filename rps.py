@@ -15,11 +15,6 @@ class Fighter():
     # Function that determines if the opponent fighter is going to throw Rock, Paper or Scissors
     # Needs Jeremy's random throw generator code
     def throw(inputs):
-
-        """ Random generator for opponent throws -- throw output is used to set the 
-            dynmaic image for the right side display label (rock paper or scissors) 
-        """
-
         this_throw = inputs[random.randrange(0,len(inputs)-1)]
         if this_throw == 'p':
             right_display_label.configure(image=paper_l)
@@ -69,9 +64,6 @@ def simple_gameplay(player_input, opponent_input):
     # If the player input rock
     if player_input == 'r':
         if opponent_input == 's':
-
-            ### Setting the dynamic label text ###
-
             results_display_lable.config(text="Rock breaks Scissors, You Win!")
             return 'win'
         elif opponent_input == 'p':
@@ -112,18 +104,7 @@ print('Welcome to Rock, Paper, Scissors')
 inputs = ['r','p','s','r','s','p','q']
 wins, losses, draws = 0,0,0
 
-
 def gui_buttons(player_input):
-
-    """
-        This function uses output from throws
-        to set the dynamic image of the left side
-        dynmaic image in the main display area 
-        (rock paper scissors) and keeps track of 
-        scores
-    
-    """
-
     opponent_input = Fighter.throw(inputs)
     global losses
     global draws
@@ -151,12 +132,6 @@ def gui_buttons(player_input):
 
 
 def reset_it(x):
-
-    """
-    reset for scores
-    
-    """
-
     global wins
     global losses
     global draws
@@ -179,8 +154,6 @@ win.wm_iconphoto(False, photo)
 
 win_frame = Frame(win)
 win_frame.pack()
-
-### Image processing for graphics ###
 
 qm = Image.open('assets/images/qm-120.png')
 rk = Image.open('assets/images/rock.png')
@@ -214,12 +187,8 @@ main_display_frame.columnconfigure(3,weight=1)
 main_display_frame.rowconfigure(1,weight=1)
 main_display_frame.pack()
 
-### Main display area ###
-
 main_display = Label(main_display_frame,width=34,height=5,font=('arial','20','bold'),relief='sunken',bd=3)
 main_display.grid(row=1,column=1,padx=10,pady=10,sticky=N)
-
-### Gameplay icons triangle below main display area ###
 
 scissors_label = Label(win,image=scissors)
 scissors_label.place(relx=0.57,rely=.79,anchor='center')
@@ -230,16 +199,12 @@ roc_label.place(relx=0.5,rely=.60,anchor='center')
 paper_label = Label(win,image=paper)
 paper_label.place(relx=0.44,rely=.80,anchor='center')
 
-### button images that call the main gameplay ###
-
 paper_label.bind("<Button-1>",lambda p: gui_buttons('p'))
 roc_label.bind("<Button-1>",lambda r: gui_buttons('r'))
 scissors_label.bind("<Button-1>",lambda s:gui_buttons('s'))
 
 versus_label = Label(win,image=versus)
 versus_label.place(relx=0.5,rely=.2,anchor='center')
-
-### Dynmaic text display bottom of main display window ###
 
 left_display_label = Label(main_display_frame,image=qs_mk)
 left_display_label.place(relx=.23,rely=.5,anchor='center')
@@ -250,8 +215,6 @@ right_display_label.place(relx=.78,rely=.5,anchor='center')
 results_display_lable = Label(main_display_frame,text="",font=('arial','16','bold'))
 results_display_lable.grid(row=1,column=1,sticky=S)
 
-### Win Lose Draw score displays ##
-
 wins_label = Label(win,text=f'Win: {wins}',height=2,padx=3,pady=5,font=('arial','11','bold'))
 wins_label.place(relx=.15,rely=.5,anchor='center')
 
@@ -260,8 +223,6 @@ loss_label.place(relx=.25,rely=.5,anchor='center')
 
 draw_label = Label(win,text=f'Draw: {draws}',height=2,padx=3,pady=5,font=('arial','11','bold'))
 draw_label.place(relx=.35,rely=.5,anchor='center')
-
-### Image buttons for Quit and Reset ###
 
 reset_btn_label = Label(win,image=reset)
 reset_btn_label.place(relx=.93,rely=.76,anchor='center')

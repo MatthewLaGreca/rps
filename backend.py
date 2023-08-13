@@ -36,57 +36,7 @@ class StateMachine():
         self.fighter = 0
         self.continues = 2
 
-def change_display(screen_to_change_to):
-    """ A function that will change what is being displayed on the screen"""
-    pass
 
-class Fighter():
-    ''' This is the basic class that defines all fighter objects'''
-
-    # Instantiates the characters name, hit points, basic damage dealt, and if they have a special or not
-    def __init__(self, name, special, hp, dmg):
-        self.name = name
-        self.special = special
-        self.hp = hp
-        self.dmg = dmg
-        self.fullhp = hp
-
-    # Function that determines if the opponent fighter is going to throw Rock, Paper or Scissors
-    # Needs Jeremy's random throw generator code
-    def throw(self):
-        pass
-
-    # Function that determines if the next opponent's throw will be a super or not, to be filled in later
-    def super(self):
-        if self.special == None:
-            return None
-        else:
-            return None
-
-    # If the opponent wins the throw, we want them to deal damage to the user.
-    def deal_dmg(self, mult):
-
-        # If the opponent's throw was a super, we want to deal more damage to the user than usual
-        if mult > 1:
-            return self.dmg*mult
-        
-        # Otherwise, just deal normal damage
-        else:
-            return self.dmg
-        
-
-    # If the opponent loses the throw, we want them to take damage
-    def take_damage(self, dmg_taken):
-        self.hp -= dmg_taken
-    
-    # We want to track and make sure the fighter is still alive
-    def status(self):
-        if self.hp <= 0:
-            return 'KO'
-
-    # If the fight needs to happen again
-    def reset(self):
-        self.hp = self.fullhp
 
 
         
@@ -127,26 +77,7 @@ def simple_gameplay(player_input, opponent_input = 'r'):
             return 'win'
 
 statemachine = StateMachine()
-little_mac = Fighter('Little Mac', 3, 55, 1)
-#=================================================================
-# Who do we want to be the fighters in the game?
-#                                1                      2                           3                                                                                       4                           5         
-# User is Big Mack, opponents = [Gabby Jay,             Bear Hugger,                Bald Bull,                                                                              Bob Charlie,                Dragon Chan, 
-# Gimmick/Special =             [Always throws rock,    Hug Special is 2x damage,   Special is a 1 hit KO, if you counter it you win, if it's a draw it happens again,      Special is 3x damage,       Special is 5x damage, but it's always scissors]
 
-#                                6                                                                                                                                                                      7           
-#                               [Mr. Sandman,                                                                                                                                                           Aran Ryan, 
-#                               [Special puts user to 'sleep', which effectively turns damage dealt to 0 until they win a throw, and every throw that is a loss or a draw is damage dealt to user,      Special steals your HP and adds to his, and is active until you win/draw a throw]
-
-#                                8                                                                                                          9                                                               10
-#                               [Super Macho Man,                                                                                           Hoy Quarlow,                                                    Nick Bruiser]
-#                               [Special is multiplicative damage and is active until a throw is won; draw retains current multiplier       Reverses rules (IE: rock beats paper, paper beats scissors,     Special is just 10x damage until a throw is a win]
-challengers = [Fighter('Gabby Jay', 1, 25, 1), Fighter('Bear Hugger', 2, 50, 2), Fighter('Bald Bull', 27.5, 55, 2), Fighter('Bob Charlie', 3, 40, 2), \
-               Fighter('Dragon Chan', 5, 50, 2), Fighter('Mr. Sandman', 'Sleep', 75, 4), Fighter('Aran Ryan', 'Drain', 60, 3), Fighter('Supermachoman', '2x', 100, 2), \
-               Fighter('Hoy Quarlow', 'Reverse', 125, 4), Fighter('Nick Bruiser', 2, 250, 10)]
-current_challenger = challengers[0]
-fighter_number = 0
-score = 0
 while True:
 
     #starting out, we want to view the Title Screen and be open to grabbing input from the user
