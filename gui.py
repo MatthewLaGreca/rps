@@ -63,3 +63,34 @@ win.mainloop()
 #                 print("Draw")
 #     else:
 #         print("Invalid input, please try again")
+
+
+# player_display_frame = Frame(main_display_frame)
+# player_display_frame.pack(padx=10,pady=10)
+# player_display_frame.place(relx=2,rely=15,anchor='center')
+
+# opponent_display_frame = Frame(win)
+# opponent_display_frame.pack(padx=10,pady=10)
+# opponent_display_frame.place(relx=90,rely=15,anchor='center')
+
+
+list = player_list
+    pl_dis = dict()
+    i=0
+    j=0
+    m=0
+    for k,v in list.items():
+        player_disp_image = Label(pl_display_frame,image=v['image'])
+        player_disp_image.grid(row=j,column=m,padx=5,pady=5)
+        print(k)
+        player_disp_name = Label(pl_display_frame,text=v['name'],font=('arial','9','bold'),width=10,wraplength=65)
+        player_disp_name.grid(row=j+1,column=m)
+        this_player = f'player{i+1}'
+        pl_dis.update({this_player:{'name':player_disp_name, 'image':player_disp_image}})
+        i+=1
+        m+=1
+        if i >=5:
+            j=2
+    def set_player_image(x):
+        img = list[f'player{i+1}']['image_lg']
+        player_label.config(image=img)
