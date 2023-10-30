@@ -522,7 +522,7 @@ paper_label.bind("<Button-1>",lambda p: gui_buttons('p'))
 roc_label.bind("<Button-1>",lambda r: gui_buttons('r'))
 scissors_label.bind("<Button-1>",lambda s:gui_buttons('s'))
 
-        ######################## Main Display Area - Dynamic ###
+######################## Main Display Area - Dynamic ###
 
 left_display_label = Label(main_display_frame,image=qs_mk)
 left_display_label.grid(row=0,column=0,padx=0,pady=5)
